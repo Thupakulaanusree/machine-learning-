@@ -1,0 +1,21 @@
+import numpy as np
+
+M = 4
+N = 5
+
+matrix = np.array([
+    [2.5, 0.5, 2.2, 1.9, 3.1],
+    [2.4, 0.7, 2.9, 2.2, 3.0],
+    [8.5, 8.6, 8.7, 8.8, 8.9],
+    [0.1, 0.2, 0.3, 0.4, 0.5]
+])
+
+matrix_T = matrix.T
+
+covariance_matrix = np.cov(matrix_T, rowvar=False)
+
+correlation_matrix = np.corrcoef(matrix_T, rowvar=False)
+
+print(f'Matrix (MxN dimension):\n{matrix}\n')
+print(f'Covariance Matrix (MxM dimension):\n{covariance_matrix}\n')
+print(f'Correlation Matrix (MxM dimension):\n{correlation_matrix}\n')
