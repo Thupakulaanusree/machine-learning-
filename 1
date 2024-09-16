@@ -1,0 +1,16 @@
+import numpy as np
+
+# Create a 1xN dimensional array (feature vector of a sample)
+N = 5  # Number of dimensions/features
+feature_vector = np.array([4, 3, 6, 5,2 ])
+
+# Compute the mean of the array
+mean = np.mean(feature_vector)
+
+# Compute the variance of the array
+variance = np.var(feature_vector)
+
+# Output the mean and variance
+print(f"Feature vector: {feature_vector}")
+print(f"Mean: {mean}")
+print(f"Variance: {variance}")
