@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+
+# Load the dataset
+data = pd.read_csv('ToyotaCorolla.csv')  # Ensure the file contains the relevant columns
+
+# Select only the required columns
+data = data[["Price", "Age_08_04", "KM", "HP", "cc", "Doors", "Gears", "Quarterly_Tax", "Weight"]]
+
+# Handle any missing values if present (optional)
+data = data.dropna()
+
+# Split the data into features (X) and target (y)
+X = data.drop('Price', axis=1)
+y = data['Price']
+
+# Split into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize the Linear Regression model
+lr_model = LinearRegression()
+
+# Train the model
+lr_model.fit(X_train, y_train)
+
+# Predict on the test set
+y_pred = lr_model.predict(X_test)
+
+# Calculate the R² value
+r2_value = r2_score(y_test, y_pred)
+
+# Accuracy using R² value
+accuracy = r2_value * 100
+
+# Output results
+print(f"R² value (Multiple Linear Regression): {r2_value:.4f}")
+print(f"Accuracy (Multiple Linear Regression): {accuracy:.2f}%")
