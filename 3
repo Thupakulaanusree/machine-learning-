@@ -1,0 +1,19 @@
+import numpy as np
+
+N = 10
+vector_x = np.array([4, 8, 15, 16, 23, 42, 27, 32, 14, 9])
+vector_y = np.array([7, 10, 12, 18, 24, 40, 28, 30, 13, 11])
+
+mean_x = np.mean(vector_x)
+mean_y = np.mean(vector_y)
+
+covariance = np.sum((vector_x - mean_x) * (vector_y - mean_y)) / (N - 1)
+
+variance_x = np.var(vector_x, ddof=1)
+variance_y = np.var(vector_y, ddof=1)
+
+correlation = covariance / np.sqrt(variance_x * variance_y)
+
+print(f'Vector X (1x{N} vector): {vector_x}')
+print(f'Vector Y (1x{N} vector): {vector_y}')
+print(f'Correlation: {correlation:.4f}')
