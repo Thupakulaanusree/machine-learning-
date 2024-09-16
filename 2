@@ -1,0 +1,17 @@
+import numpy as np
+
+# Create two 1xM dimensional vectors (feature vectors of samples)
+M = 5  # Number of dimensions/features
+vector_1 = np.array([4, 3,5, 6,  2])
+vector_2 = np.array([7, 8, 5, 6, 9])
+
+# Compute the covariance between the two vectors
+covariance_matrix = np.cov(vector_1, vector_2)
+
+# Extract the covariance value (since it's a 2x2 matrix, we get the off-diagonal element)
+covariance_value = covariance_matrix[0, 1]
+
+# Output the vectors and covariance
+print(f"Vector 1: {vector_1}")
+print(f"Vector 2: {vector_2}")
+print(f"Covariance between the vectors: {covariance_value}")
