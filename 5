@@ -1,0 +1,50 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score
+
+# Load dataset
+data = pd.read_csv('50_Startups.csv')
+
+# Preprocessing: convert categorical 'State' into dummy/indicator variables
+data = pd.get_dummies(data, drop_first=True)
+
+# Split data into features (X) and target (y)
+X = data.drop('Profit', axis=1)
+y = data['Profit']
+
+# Split into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# ======== Single Linear Regression (using 'R&D Spend' only) ========
+X_train_single = X_train[['R&D Spend']]
+X_test_single = X_test[['R&D Spend']]
+
+# Fit the model
+lr_single = LinearRegression()
+lr_single.fit(X_train_single, y_train)
+
+# Predict and calculate R^2 for single regression
+y_pred_single = lr_single.predict(X_test_single)
+r2_single = r2_score(y_test, y_pred_single)
+
+print(f"R² value (Single Linear Regression using 'R&D Spend'): {r2_single:.4f}")
+
+# ======== Multiple Linear Regression ========
+# Fit the model using all features
+lr_multiple = LinearRegression()
+lr_multiple.fit(X_train, y_train)
+
+# Predict and calculate R^2 for multiple regression
+y_pred_multiple = lr_multiple.predict(X_test)
+r2_multiple = r2_score(y_test, y_pred_multiple)
+
+print(f"R² value (Multiple Linear Regression): {r2_multiple:.4f}")
+
+# Accuracy using R² value
+accuracy_single = r2_single * 100
+accuracy_multiple = r2_multiple * 100
+
+print(f"Accuracy (Single Linear Regression): {accuracy_single:.2f}%")
+print(f"Accuracy (Multiple Linear Regression): {accuracy_multiple:.2f}%")
